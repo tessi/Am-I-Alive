@@ -1,0 +1,37 @@
+= Am I Alive 
+
+Am I Alive checks your web projects constantly for you and notifies you if they are unreachable.
+It is designed to run on a heroku worker.
+
+== Configuration
+
+Most configuration happens in <tt>config.yml</tt>. The configuration is written in {YAML}[http://www.yaml.org/]
+and preprocess by erb, which lets you define some options (eg. smpt password) through environment variables.
+
+  :password: <%= ENV['AMIALIVE_EMAIL_PASSWORD'] %>
+
+When deploying to Heroku, you may set those variables with:
+
+  heroku config:add AMIALIVE_EMAIL_PASSWORD=some_random_password
+
+You definitely want to change the mail configuration.
+It is currently prepared to send emails from a gmail account, but every other config is possible.
+The mail config is directly forwarded to Pony,
+so have a look at their {Github page}[https://github.com/benprew/pony] for documentation.
+
+Another important part are the email and urls lists. Am I Alive will check every url in the url
+list and, in case of an error, it will send mail to every email address specified in the emails list.
+
+== Deployment
+
+Checkout this repository and change the configuration as you like. Then:
+
+  bundle install
+  heroku create --stack cedar
+  heroku config:add key=value #for every environment variable you use in the config
+  heroku scale web=0 worker=1
+
+== Licence
+
+This software is distributed under the MIT license, as seen in http://www.opensource.org/licenses/mit-license.php.
+You may find a copy in the LICENSe file.

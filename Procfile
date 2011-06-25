@@ -1,0 +1,1 @@
+worker: bundle exec ruby am_i_alive.rb
