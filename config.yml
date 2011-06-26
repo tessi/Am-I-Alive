@@ -1,7 +1,7 @@
 :sleep_time: <%= 5 %> # time between checking the urls in seconds
 :tolerated_failures: 2 # number of failures that may happen before alters will be sent
 :send_alarms_only_once: Yes # whether an alert should sent only once or for every failing check
-:urls: [ <%= ENV['AMIALIVE_URLS'] %>] # comma seperated list of urls taken from env-var - http://foo.com, http://sub.bar.org
+:urls: [ <%= ENV['AMIALIVE_URLS'] %> ] # comma seperated list of urls taken from env-var - http://foo.com, http://sub.bar.org
 :emails: [ <%= ENV['AMIALIVE_EMAILS'] %> ] # comma seperated list of email addresses, this app should send a mail to if an alert occurs
 :mail: # will be given directly to Pony.options, see https://github.com/benprew/pony
   :via: :smtp
