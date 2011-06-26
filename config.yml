@@ -1,4 +1,4 @@
-:sleep_time: <%= 5*60 %> # time between checking the urls in seconds
+:sleep_time: <%= 5 %> # time between checking the urls in seconds
 :tolerated_failures: 2 # number of failures that may happen before alters will be sent
 :send_alarms_only_once: Yes # whether an alert should sent only once or for every failing check
 :urls: [ <%= ENV['AMIALIVE_URLS'] %>] # comma seperated list of urls taken from env-var - http://foo.com, http://sub.bar.org
