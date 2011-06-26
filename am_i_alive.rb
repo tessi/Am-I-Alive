@@ -12,6 +12,7 @@ class AmIAlive
 
     def run
       @config || configure!
+      puts 'start watching...'
       while sleep(@config[:sleep_time])
         @config[:urls].each { |url| puts "checking: #{url}"; check url }
       end
