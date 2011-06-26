@@ -1,4 +1,4 @@
-%w{ yaml erb pony}.each { |d| require d }
+%w{ yaml erb pony open-uri}.each { |d| require d }
 
 class AmIAlive
   class << self
