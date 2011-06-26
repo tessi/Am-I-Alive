@@ -62,5 +62,6 @@ class AmIAlive
 end
 
 if $0 == __FILE__
+  STDOUT.sync = true #make heroku logs update synchronously
   AmIAlive.run
 end
