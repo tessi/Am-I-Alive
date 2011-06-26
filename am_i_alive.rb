@@ -43,7 +43,7 @@ class AmIAlive
         e.message
       end
       if status == '200'
-        recover if failure? url
+        recover url if failure? url
         @failures[url] = 0
       else
         @failures[url] = (@failures[url] ? @failures[url] + 1 : 1)
