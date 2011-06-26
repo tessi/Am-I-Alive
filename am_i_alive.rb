@@ -19,7 +19,7 @@ class AmIAlive
     end
 
     def failure?(url, first_failure_only=false)
-      fail_num = @failures[url]
+      fail_num = @failures[url] || 0
       first_failure_only ? fail_num == @config[:tolerated_failures] + 1 : fail_num > @config[:tolerated_failures]
     end
 
