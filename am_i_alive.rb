@@ -2,8 +2,6 @@
 
 class AmIAlive
   class << self
-    # configures the system. precedence:
-    # environment variable > config_files > default values
     def configure!
       @config ||= YAML.load( ERB.new(File.read('config.yml')).result )
       Pony.options = @config[:mail]
@@ -12,9 +10,8 @@ class AmIAlive
 
     def run
       @config || configure!
-      puts 'start watching...'
       while sleep(@config[:sleep_time])
-        @config[:urls].each { |url| puts "checking: #{url}"; check url }
+        @config[:urls].each { |url| check url }
       end
     end
 
@@ -25,13 +22,11 @@ class AmIAlive
 
     def raise_alarm(url, status)
       if failure? url, @config[:send_alarms_only_once]
-        puts "ALARM!! There is a problem (#{status}) with #{url}"
         send_to_everyone('ALARM!!', "There is a problem (#{status}) with #{url}")
       end
     end
 
     def recover(url)
-      puts "RECOVER!! Everything's OK now with #{url}"
       send_to_everyone('RECOVER! \o/', "Everything's OK now with #{url}")
     end
 
@@ -62,6 +57,6 @@ class AmIAlive
 end
 
 if $0 == __FILE__
-  STDOUT.sync = true #make heroku logs update synchronously
+  STDOUT.sync = true
   AmIAlive.run
 end
